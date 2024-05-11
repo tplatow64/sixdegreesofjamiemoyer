@@ -1,10 +1,16 @@
-from flask import Flask
+from flask import Flask, redirect, url_for, request, render_template
+from neo4j import GraphDatabase
+from py2neo import Graph
+import json
 import os
+import requests
 
 app = Flask(__name__)
 env_config = os.getenv("APP_SETTINGS", "config.DevelopmentConfig")
 app.config.from_object(env_config)
 uri = app.config.get('NEO_URI')
+print('connecting')
+driver = GraphDatabase.driver(uri, auth=("neo4j", pwd))
 
 @app.route("/")
 def index():
