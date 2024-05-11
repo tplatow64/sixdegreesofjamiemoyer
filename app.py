@@ -25,12 +25,12 @@ def find_person(id: str) -> json:
             ORDER BY p.nameLast      
             """
         ret_val = neo4j_session.run(query, p1=id)
-        print(f'query done {ret_val.data()[0]['name']}')
+        person = ret_val.data()[0]['name']
+        print(f'query done {person}')
         neo4j_session.close()
     except Exception as e:
         print(f"error querying database {e}")
-    return ret_val.data()[0]['name']
-
+    return person
 
 @app.route("/")
 def index():
