@@ -37,4 +37,5 @@ with driver.session(database="neo4j") as session:
         # return ('hi')
 
     #app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run()
 
