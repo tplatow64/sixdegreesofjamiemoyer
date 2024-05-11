@@ -16,16 +16,19 @@ print('connected')
 
 def find_person(id: str) -> json:
     print(f'finding {id}')
-    neo4j_session = driver.session(database="neo4j")
-    print('session defined')
-    query = f"""MATCH (p:Person)
-        WHERE p.debut <> "" AND p.playerID = $p1
-        RETURN p.playerID as playerID, p.name + ' ' + left(p.debut,4) + ' - ' + left(p.finalGame, 4) AS name
-        ORDER BY p.nameLast      
-        """
-    ret_val = neo4j_session.run(query, p1=id)
-    print('query done')
-    neo4j_session.close()
+    try:
+        neo4j_session = driver.session(database="neo4j")
+        print('session defined')
+        query = f"""MATCH (p:Person)
+            WHERE p.debut <> "" AND p.playerID = $p1
+            RETURN p.playerID as playerID, p.name + ' ' + left(p.debut,4) + ' - ' + left(p.finalGame, 4) AS name
+            ORDER BY p.nameLast      
+            """
+        ret_val = neo4j_session.run(query, p1=id)
+        print(f'query done {ret_val.data()[0]['name']}')
+        neo4j_session.close()
+    except Exception as e:
+        print(f"error querying database {e}")
     return ret_val.data()[0]['name']
 
 
