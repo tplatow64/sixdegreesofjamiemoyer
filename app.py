@@ -199,5 +199,7 @@ def show_person():
     path = determine_degrees(player1ID, player2ID)
     path_str = draw_path(path, player2ID)
     return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
-neo4J_session.close()
+
+print('not closing the bitch here')
+#neo4J_session.close()
 
