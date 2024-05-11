@@ -25,17 +25,10 @@ def find_person(id: str) -> json:
     return ret_val.data()[0]['name']
 
 
-# @app.route("/")
-# def index():
-#     return "Hello World!"
 with driver.session(database="neo4j") as session:
     @app.route("/")
     def index():
-        # return f"URI is {uri}"
         print('find person')
         return find_person('rojasjo03')
-        # return ('hi')
 
-    #app.run(host='0.0.0.0', port=17758, debug=True)
-    #app.run()
-
+    app.run(host='0.0.0.0', port=17758, debug=True)
