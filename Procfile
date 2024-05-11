@@ -1,1 +1,1 @@
-web: gunicorn app:sixdegrees_api
+web: gunicorn sixdegrees_api:app
