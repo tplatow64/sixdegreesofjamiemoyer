@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>6 Degrees of Jamie Moyer</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/autocomplete.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+        <script src="/static/javascript/autocomplete.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <div id="banner">
+            <div id="wrapper" style="width:100%; overflow:hidden;margin: 0 auto;">
+                <div id="container" style="width:100%; margin-right:auto;position:relative;left:50%;margin-left:-759px;">
+                    <img src="{{ general_image_dir }}JamieMoyerBorder2.png" alt="Our Hero: Jamie Moyer" style="display:block;">
+                </div>
+            </div>
+        </div>
+    </head>
+    <body>
+    <style>
+        table,
+        th,
+        td {
+          padding: 10px;
+          border: 0px solid black;
+          border-radius: 10px
+        }
+    </style>
+        <!--Make sure the form has the autocomplete function switched off:-->
+        <form id="find_player" autocomplete="off" method="post">
+            <table style="margin:auto;">
+                <tr>
+                    <td>
+                        </br>
+                        <div class="autocomplete" style="width:300px;">
+                        <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name">
+                        <input id="player1ID" type="hidden" name="player1ID">
+                        <input id="player2ID" type="hidden" name="player2ID" value="moyerja01">
+                        </div>
+                        <script>
+                            autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
+                        </script>
+                        <input type="submit" value="Connect Me To Jamie Moyer!" style="background-color:#C00000; font-weight: 700; border-radius:12px; cursor:pointer">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% if path_str|length >0: %}
+        <label id="pathway">{{ path_str }}</label>
+    {% else %}
+        <label id="pathway"></label>
+    {% endif %}
+    <hr>
+    {% include 'JamieMoyerFAQ.html' %}
+    </body>
+</html>

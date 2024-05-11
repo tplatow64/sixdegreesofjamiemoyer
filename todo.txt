@@ -1,0 +1,10 @@
+    1. done - wire autocomplete selection to API
+    2. done - have the autocomplete text box show the name, not the id
+    3. done - autocomplete not working after the first run
+    4. done - add in generational suffix
+5. get photos in!!!!
+    6. done - move db credentials
+7. about text / explanitory text
+8. background color
+9. resize banner
+10. profit
