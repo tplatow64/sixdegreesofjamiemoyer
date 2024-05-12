@@ -200,6 +200,6 @@ def show_person():
     path_str = draw_path(path, player2ID)
     return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
 
-print('not closing the bitch here')
+print('not closing session here')
 #neo4J_session.close()
-
+#app.run(host='0.0.0.0', port=17758, debug=True)

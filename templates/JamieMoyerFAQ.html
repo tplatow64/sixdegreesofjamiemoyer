@@ -178,7 +178,7 @@ in Major League Baseball that included helping to lead my beloved Phillies to
 their World Series victory in 2008. Moyer's time in the MLB spans 26 years and
 almost 700 games played for 9 different teams across both the NL and AL. The
 sheer number of players with whom he's shared a roster over the years makes him
-an ideal candidate for a baseball-themed 'Six Degrees of Kevin Bacon' game.</span><span
+an ideal candidate for a baseball-themed <b>Six Degrees of Kevin Bacon</b> game.</span><span
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
 "Times New Roman";mso-bidi-font-family:"Times New Roman"'><o:p></o:p></span></p>
 
@@ -195,8 +195,8 @@ of Kevin Bacon?&nbsp;<o:p></o:p></span></b></p>
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
 "Times New Roman";mso-bidi-font-family:Arial;color:black;margin-left:5%;margin-right:5%;display:block'>Kevin Bacon is an
 actor who starred in hundreds of movies and television shows across several
-decades. In 1994, three college students invented a game called Six Degrees of
-Kevin Bacon ' the premise is that you should be able to connect any
+decades. In 1994, three college students invented a game called <b>Six Degrees of
+Kevin Bacon</b> where the premise is that you should be able to connect any
 actor/actress to Kevin Bacon in 6 or fewer hops. You can connect actors when
 they've starred in the same film or TV show together. So, for example, Nicolas
 Cage starred in <i>Fast Times at Ridgemont High</i> with Sean Penn, who starred
@@ -220,13 +220,13 @@ least number of connections. To choose Mike Trout as an example, Mike Trout was
 teammates with Raul Ibanez on the 2014 Angels and Raul Ibanez was teammates
 with Jamie Moyer on the 1997 Mariners. For our purposes, a connection is
 considered to be made any time that Player A played on the same team as Player
-B in the same year. Unfortunately, my data cannot yet account for mid-season
-trades (I'm working on it, I promise!) so there may be instances when Player A
-was traded away in spring and Player B joined that fall ' that would still be
+B in the same year. Unfortunately, my data cannot yet account for in-season
+transactions so there may be instances when Player A 
+was traded away in spring and Player B joined that fall that would still be
 considered a connection even though they weren't technically on the team at the
 same time. If you happen to discover any of these anomalies, I would appreciate
-you emailing them to me so I can use them to test with as I develop the
-mid-season-trades functionality.&nbsp;<o:p></o:p></span></p>
+you <a href="mailto:info@sixdegreesofjamiemoyer.com">emailing them to me</a> so I can use them to test with if I attempt to develop the 
+mid-season changes functionality.&nbsp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><b><span
 style='font-size:12.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
@@ -243,7 +243,7 @@ color:#C00000'><o:p></o:p></span></b></p>
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
 "Times New Roman";mso-bidi-font-family:Arial;color:black;margin-left:5%;margin-right:5%;display:block'>I chose to do this
 project because I'm a fan of Jamie Moyer and because I wanted to get some
-experience with a graph database. Graph <span class=GramE>databases</span>
+experience with a graph database. Graph databases
 structure information into related nodes which makes them ideally suited for the
 way baseball players are connected to each other through the teams they've
 played on. I chose to use Neo4j specifically because it's a very popular graph
@@ -255,7 +255,7 @@ PostgreSQL database. I then used SQL to create a temporary table that keyed all
 the players on a combination of team plus year (essentially creating yearly
 rosters) and then used Python to load that roster table into Neo4j. Once the
 graph database was populated, I created REST APIs in Flask so that the database
-could interface with a web UI. I used a Python library to assist with the 
+could interface with a web UI. I used a javascript library to assist with the 
 autocomplete functionality when you type in a player's name. I then played 
 around with HTML until I had a passable-looking front end. &nbsp;&nbsp;<o:p></o:p></span></p>
 
@@ -273,7 +273,10 @@ style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family
 "Times New Roman";mso-bidi-font-family:Arial;color:black;margin-left:5%;margin-right:5%;display:block'>This website was
 created as a pet project, mainly so I could learn the Neo4j graph database. It
 ended up turning out pretty cool so I thought I'd put it on the web for
-everyone to access. I love hearing from end users and am happy to consider any
+everyone to access. Please note that I am using the cheapest/free versions of 
+my website hosting and database providers because I am a broke college student.
+Therefore my site is not equipped for performance or scaling so please be patient with slow response times/downtime. 
+I love hearing from end users and am happy to consider any
 suggestions and comments you have but please remember this is my
 part-part-part-time gig so don't expect miracles! Feel free to email
 me at <a href="mailto:info@sixdegreesofjamiemoyer.com">info@sixdegreesofjamiemoyer.com</a>.</span></p>
@@ -301,7 +304,7 @@ Logos: Sportslogos.net (<a href="https://www.sportslogos.net/" target="_blank">h
 <p class=MsoNormal style='margin-bottom:0in;line-height:normal;tab-stops:373.5pt'><span
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
 "Times New Roman";mso-bidi-font-family:Arial;color:black;mso-themecolor:text1;margin-left:5%;margin-right:5%;display:block'>Player
-Headshots obtained from various internet sources including <a
+Headshots linked from <a
 href="https://www.baseball-reference.com/" target="_blank">https://www.baseball-reference.com/</a>
 <span style='mso-spacerun:yes'></span><o:p></o:p></span></p>
 
