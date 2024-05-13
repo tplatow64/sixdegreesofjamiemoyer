@@ -173,9 +173,8 @@ style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
 "Times New Roman";mso-bidi-font-family:Arial;color:black;margin-left:5%;margin-right:5%;display:block'>Jamie Moyer is
 pretty much a hometown hero for me. He is the only professional baseball player to ever come out of my small-town high
-school and he had an incredibly long and successful career
-in Major League Baseball that included helping to lead my beloved Phillies to
-their World Series victory in 2008. Moyer's time in the MLB spans 26 years and
+school, with an incredibly long and successful career that included helping to lead my beloved Phillies to
+their 2008 World Series victory. Moyer's time in the MLB spans 26 years and
 almost 700 games played for 9 different teams across both the NL and AL. The
 sheer number of players with whom he's shared a roster over the years makes him
 an ideal candidate for a baseball-themed Six Degrees of Kevin Bacon game.</span><span
@@ -215,7 +214,7 @@ style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family
 <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
 "Times New Roman";mso-bidi-font-family:Arial;color:black;margin-left:5%;margin-right:5%;display:block'><b>You simply type the
-name of any MLB player in history and this site will connect him to Jamie Moyer in the fewest number of steps.</b> 
+name of any MLB player in history into the box above and this site will connect him to Jamie Moyer in the fewest number of steps.</b> 
 To choose Mike Trout as an example, Mike Trout was
 teammates with Raul Ibanez on the 2014 Angels and Raul Ibanez was teammates
 with Jamie Moyer on the 1997 Mariners. For our purposes, a connection is
@@ -294,10 +293,11 @@ PostgreSQL database. I then used SQL to create a temporary table that keyed all
 the players on a combination of team plus year (essentially creating yearly
 rosters) and then used Python to load that roster table into Neo4j. Once the
 graph database was populated, I created REST APIs in Flask so that the database
-could interface with a web UI. I used a javascript library to assist with the 
+could interface with a web UI. I used a JavaScript library to assist with the 
 autocomplete functionality when you type in a player's name. I then played 
 around with the HTML until I had a passable-looking front end and deployed it all 
-to the cheapest webhosting provider I could find. <a href="https://github.com/tplatow64/sixdegreesofjamiemoyer">Check it out on Github.</a>&nbsp;&nbsp;<o:p></o:p></span></p>
+to the cheapest webhosting provider I could find. If you are extra-super-nerdy feel free to 
+<a href="https://github.com/tplatow64/sixdegreesofjamiemoyer">check out the code on Github.</a>&nbsp;&nbsp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;line-height:normal'><span
 style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
