@@ -41,7 +41,7 @@
                         </br>
                         <div class="autocomplete" style="width:300px;">
                         <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name" autofocus onfocus="this.select()">
-                        <input id="player1ID" type="text" name="player1ID" onChange="enableButton()">
+                        <input id="player1ID" type="text" name="player1ID" oninput="checkEnableButton()">
                         <input id="player2ID" type="hidden" name="player2ID" value="moyerja01">
                         </div>
                         <script>
@@ -51,8 +51,13 @@
                         <script>
                             document.getElementById("submitButton").disabled = true;
                             
-                            function enableButton(){
-                                document.getElementById("submitButton").disabled = false;
+                            function checkEnableButton(){
+                                if(document.getElementById("player1ID").value === ""){
+                                    document.getElementById("submitButton").disabled = true;
+                                }else{
+                                    document.getElementById("submitButton").disabled = false;
+                                }
+                                
                             }
                         </script>
                     </td>
