@@ -41,25 +41,13 @@
                         </br>
                         <div class="autocomplete" style="width:300px;">
                         <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name" autofocus onfocus="this.select()">
-                        <input id="player1ID" type="text" name="player1ID" oninput="checkEnableButton()">
+                        <input id="player1ID" type="hidden" name="player1ID">
                         <input id="player2ID" type="hidden" name="player2ID" value="moyerja01">
                         </div>
                         <script>
                             autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
                         </script>
                         <input id="submitButton" type="submit" value="Connect Me To Jamie Moyer!" disabled style="background-color:#C00000; font-weight: 700; border-radius:12px; cursor:pointer">
-                        <script>
-                            // document.getElementById("submitButton").disabled = true;
-                            
-                            function checkEnableButton(){
-                                // if(document.getElementById("player1ID").value === ""){
-                                //     document.getElementById("submitButton").disabled = true;
-                                // }else{
-                                //     document.getElementById("submitButton").disabled = false;
-                                // }
-                                document.getElementById("submitButton").disabled = false;
-                            }
-                        </script>
                     </td>
                 </tr>
             </table>
