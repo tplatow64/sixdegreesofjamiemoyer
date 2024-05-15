@@ -25,3 +25,17 @@ header {
     font-size: 24px;
     margin: 0;
 }
+
+input.submitButton {
+    background-color:#C00000;
+    font-weight: 700;
+    border-radius:12px;
+    cursor:pointer
+}
+
+input.submitButton:disabled {
+    background-color:#C06060;
+    font-weight: 700;
+    border-radius:12px;
+    cursor:pointer
+}
