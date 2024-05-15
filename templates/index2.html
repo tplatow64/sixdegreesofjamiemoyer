@@ -47,17 +47,17 @@
                         <script>
                             autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
                         </script>
-                        <input id="submitButton" type="submit" value="Connect Me To Jamie Moyer!" style="background-color:#C00000; font-weight: 700; border-radius:12px; cursor:pointer">
+                        <input id="submitButton" type="submit" value="Connect Me To Jamie Moyer!" disabled style="background-color:#C00000; font-weight: 700; border-radius:12px; cursor:pointer">
                         <script>
-                            document.getElementById("submitButton").disabled = true;
+                            // document.getElementById("submitButton").disabled = true;
                             
                             function checkEnableButton(){
-                                if(document.getElementById("player1ID").value === ""){
-                                    document.getElementById("submitButton").disabled = true;
-                                }else{
-                                    document.getElementById("submitButton").disabled = false;
-                                }
-                                
+                                // if(document.getElementById("player1ID").value === ""){
+                                //     document.getElementById("submitButton").disabled = true;
+                                // }else{
+                                //     document.getElementById("submitButton").disabled = false;
+                                // }
+                                document.getElementById("submitButton").disabled = false;
                             }
                         </script>
                     </td>
