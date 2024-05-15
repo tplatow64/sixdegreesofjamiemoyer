@@ -49,7 +49,7 @@
                         </script>
                         <input id="submitButton" type="submit" value="Connect Me To Jamie Moyer!" style="background-color:#C00000; font-weight: 700; border-radius:12px; cursor:pointer">
                         <script>
-                            if(this.getElementsByTagName("input")[1].value === ""){
+                            if(document.getElementById("player1ID").value === ""){
                                 document.getElementById("submitButton").disabled = true;
                             }else{
                                 document.getElementById("submitButton").disabled = false;
