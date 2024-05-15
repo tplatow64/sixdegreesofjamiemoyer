@@ -17,9 +17,10 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
+        var matchesFound = 0;
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
-          if (arr[i]['name'].toUpperCase().search(val.toUpperCase())>=0) {
+          if (arr[i]['name'].toUpperCase().search(val.toUpperCase())>=0 && matchesFound < 10) {
             /*pos = arr[i]['name'].toUpperCase().search(val.toUpperCase())  for bolding*/
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
@@ -29,7 +30,7 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
             b.innerHTML += "<input type='hidden' value='" + arr[i]['name'] + "'>";
             b.innerHTML += "<input type='hidden' value='" + arr[i][id_name] + "'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
-                b.addEventListener("click", function(e) {
+            b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 /* alert(this.getElementsByTagName("input")[0].value);*/
                 inp.value = this.getElementsByTagName("input")[0].value;
@@ -39,6 +40,9 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
                 closeAllLists();
             });
             a.appendChild(b);
+            matchesFound++;
+          }else if(matchesFound >= 10){
+            break;
           }
         }
     });
