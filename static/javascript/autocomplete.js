@@ -2,6 +2,7 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
     /*the autocomplete function takes four arguments,
     the text field element, the hidden element and an array of possible autocompleted values:*/
     var currentFocus;
+    var maxMatches = 25;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
         var a, b, i, val = this.value;
@@ -20,7 +21,7 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
         var matchesFound = 0;
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
-          if (arr[i]['name'].toUpperCase().search(val.toUpperCase())>=0 && matchesFound < 10) {
+          if (arr[i]['name'].toUpperCase().search(val.toUpperCase())>=0 && matchesFound < maxMatches) {
             /*pos = arr[i]['name'].toUpperCase().search(val.toUpperCase())  for bolding*/
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
@@ -42,7 +43,7 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
             });
             a.appendChild(b);
             matchesFound++;
-          }else if(matchesFound >= 10){
+          }else if(matchesFound >= maxMatches){
             break;
           }
         }
@@ -65,7 +66,15 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
           addActive(x);
         } else if (e.keyCode == 13) {
           /*If the ENTER key is pressed, prevent the form from being submitted,*/
-          e.preventDefault();
+          if(a.children.length !== 1){ // more than 1 player in list
+            e.preventDefault();
+          }else{ // only 1 player in list
+            currentFocus = 0;
+            if (x) x[currentFocus].click();
+            document.getElementById("find_player").submit();
+          }
+          
+          
           if (currentFocus > -1) {
             /*and simulate a click on the "active" item:*/
             if (x) x[currentFocus].click();
