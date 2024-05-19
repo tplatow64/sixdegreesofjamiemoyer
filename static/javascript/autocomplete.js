@@ -21,7 +21,8 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
         var matchesFound = 0;
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
-          if (arr[i]['name'].toUpperCase().search(val.toUpperCase())>=0 && matchesFound < maxMatches) {
+          var regex = val.toUpperCase().replace(/\./g, '\\.')
+          if (arr[i]['name'].toUpperCase().search(regex)>=0 && matchesFound < maxMatches) {
             /*pos = arr[i]['name'].toUpperCase().search(val.toUpperCase())  for bolding*/
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
