@@ -66,13 +66,14 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
           addActive(x);
         } else if (e.keyCode == 13) {
           /*If the ENTER key is pressed, prevent the form from being submitted,*/
-          if(a.children.length !== 1){ // more than 1 player in list
-            e.preventDefault();
-          }else{ // only 1 player in list
-            currentFocus = 0;
-            if (x) x[currentFocus].click();
-            document.getElementById("find_player").submit();
-          }
+          e.preventDefault();
+          // if(a.children.length !== 1){ // more than 1 player in list
+            
+          // }else{ // only 1 player in list
+          //   currentFocus = 0;
+          //   if (x) x[currentFocus].click();
+          //   document.getElementById("find_player").submit();
+          // }
           
           
           if (currentFocus > -1) {
