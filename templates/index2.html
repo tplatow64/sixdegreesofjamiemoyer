@@ -38,25 +38,27 @@
         <form id="find_player" autocomplete="off" method="post">
             <table style="margin:auto;">
                 <tr>
-                    <td>
-                        <p style='font-size:14.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
-                        "Times New Roman";mso-bidi-font-family:Arial;color:#C00000;display:block;margin:auto;'><b>
+                    <td style="margin:auto;margin-left:5%;margin-right:5%;">
+                        <p style='font-size:18.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
+                        "Times New Roman";mso-bidi-font-family:Arial;color:#000000;display:block;margin:auto;max-width:100%;'><b>
                         Connect Any MLB Player In History to Jamie Moyer! 
                         </b></p>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="margin:auto">
                         </br>
-                        <div class="autocomplete" style="width:300px;">
-                        <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name" autofocus onfocus="this.select()">
-                        <input id="player1ID" type="hidden" name="player1ID">
-                        <input id="player2ID" type="hidden" name="player2ID" value="moyerja01">
+                        <div style="margin:auto;text-align:center">
+                            <div class="autocomplete" style="width:300px;margin:auto;display:inline-block">
+                            <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name" autofocus onfocus="this.select()">
+                            <input id="player1ID" type="hidden" name="player1ID">
+                            <input id="player2ID" type="hidden" name="player2ID" value="moyerja01">
+                            </div>
+                            <script>
+                                autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
+                            </script>
+                            <input id="submitButton" class="submitButton" type="submit" value="Connect Me To Jamie Moyer" style="display:inline-block" disabled>
                         </div>
-                        <script>
-                            autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
-                        </script>
-                        <input id="submitButton" class="submitButton" type="submit" value="Connect Me To Jamie Moyer!" disabled>
                     </td>
                 </tr>
             </table>
