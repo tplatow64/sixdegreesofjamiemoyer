@@ -81,6 +81,7 @@ def build_bball_link(bbrefid: str):
 
 def build_player_image(item: object) -> str:
     print('build player image')
+    # fallback to use the locally stored images
     # if(os.path.exists(f"{player_image_dir}{item["playerID"]}.jpg")):
     #     return f'<img src="{player_image_dir}{item["playerID"]}.jpg" alt="{item['name']}">'
     if(item['imageUrl'] != ''):
@@ -149,13 +150,13 @@ def draw_path(path: object, end_player: str)->str:
     #https://www.sportslogos.net/teams/list_by_league/53/American_League/AL/logos/
     len_list = len(path[0]['p'])-1
     ret_val = '<div align=center>'
+    ret_val = ret_val + generate_degrees_string(path)
     ret_val = ret_val + '<table align=center style="border: none;">'
     last_team = ''
     item_count = 0
     for item in path[0]['p']:
         item_count+=1
         if 'playerID' in item:
-            # print(item)
             ret_val = ret_val + path_player(end_player, item_count, item)
         elif 'team_year' in item:
             ret_val = ret_val + path_team(item)
@@ -168,6 +169,22 @@ def draw_path(path: object, end_player: str)->str:
     ret_val = ret_val + "</div>"
     return ret_val
 
+def generate_degrees_string(path: object)->str:
+    ret_val = f'{FONT_SPAN_BLACK}{path[0]['p'][0]['nameFirst'] + ' ' + path[0]['p'][0]['nameLast']}'
+    ret_val = ret_val + f' is {get_num_degrees(path)} away from '
+    ret_val = ret_val + f'{path[0]['p'][-1]['nameFirst'] + ' ' + path[0]['p'][-1]['nameLast']}'
+    ret_val = ret_val + f'{END_FONT_SPAN}'
+    return ret_val
+
+def get_num_degrees(path: object)->str:
+    num_degrees = 0
+    for item in path[0]['p']:
+        if 'team_year' in item:
+            num_degrees = num_degrees + 1
+    if num_degrees != 1:
+        return str(num_degrees) + ' degrees'
+    else:
+        return str(num_degrees) + ' degree'
 
 print('cache people')
 player_cache = all_people()
