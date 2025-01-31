@@ -102,9 +102,10 @@ def draw_same_person_path()->str:
     ret_val = ret_val + "</div>"
     return ret_val
 
-def path_team(item: object) -> str:
+def path_team(item: object, debug: bool = False) -> str:
     print('path team called')
-    print(f'Team: {item["franchiseName"]}  -  {item["year"]}')
+    if(debug):
+        print(f'Team: {item["franchiseName"]}  -  {item["year"]}')
     ret_val = draw_team_logo(item)
     ret_val = ret_val + f'{TD}{FONT_SPAN_BLACK}{item["teamName"]}{END_FONT_SPAN}<br>'
     ret_val = ret_val + f'{FONT_SPAN_BLACK} in {item["year"]}{END_FONT_SPAN}</td>'
@@ -127,12 +128,13 @@ def draw_team_logo(item: object) -> str:
 
 
 
-def path_player(end_player: str, item_count: int, item: object) -> str:
+def path_player(end_player: str, item_count: int, item: object, debug: bool = False) -> str:
     print('path player')
     playerID = item["playerID"]
     bbrefid = item["bbrefid"]
     name = item["name"]
-    print(f'Player: {playerID} - {name}') 
+    if(debug):
+        print(f'Player: {playerID} - {name}') 
     link = build_bball_link(bbrefid)
     image = build_player_image(item)
     ret_val = f'{TR}{TD}<a href="{link}" target="_blank">{image}{NEWLINE}</a></td>'
@@ -144,7 +146,7 @@ def path_player(end_player: str, item_count: int, item: object) -> str:
             ret_val = ret_val + f'<tr>{TD}{FONT_SPAN_BLACK}WHO PLAYED FOR{END_FONT_SPAN}</td></tr>'
     return ret_val
 
-def draw_path(path: object, end_player: str)->str:
+def draw_path(path: object, end_player: str, debug: bool = False)->str:
     print('draw path')
     #logos found at: 
     #https://www.sportslogos.net/teams/list_by_league/53/American_League/AL/logos/
@@ -152,19 +154,19 @@ def draw_path(path: object, end_player: str)->str:
     ret_val = '<div align=center>'
     ret_val = ret_val + generate_degrees_string(path)
     ret_val = ret_val + '<table align=center style="border: none;">'
-    last_team = ''
     item_count = 0
     for item in path[0]['p']:
         item_count+=1
         if 'playerID' in item:
-            ret_val = ret_val + path_player(end_player, item_count, item)
+            ret_val = ret_val + path_player(end_player, item_count, item, debug)
         elif 'team_year' in item:
-            ret_val = ret_val + path_team(item)
+            ret_val = ret_val + path_team(item, debug)
         else:
             continue
-        if item_count < len_list:
-            print('   |   ')
-            print('   v   ')
+        if(debug):
+            if item_count < len_list:
+                print('   |   ')
+                print('   v   ')
     ret_val = ret_val + "</table>"
     ret_val = ret_val + "</div>"
     return ret_val
@@ -219,4 +221,6 @@ def show_person():
 
 print('not closing session here')
 #neo4J_session.close()
+
+# uncomment this to test locally
 # app.run(host='0.0.0.0', port=5000, debug=True)
