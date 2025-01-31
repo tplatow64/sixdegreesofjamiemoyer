@@ -81,13 +81,18 @@ def build_bball_link(bbrefid: str):
 
 def build_player_image(item: object) -> str:
     print('build player image')
-    # fallback to use the locally stored images
-    # if(os.path.exists(f"{player_image_dir}{item["playerID"]}.jpg")):
-    #     return f'<img src="{player_image_dir}{item["playerID"]}.jpg" alt="{item['name']}">'
     if(item['imageUrl'] != ''):
         response = requests.get(f'{item['imageUrl']}')
         if response.status_code == 200:
             return f'<img src="{item['imageUrl']}" alt="{item['name']}">'
+        else:
+            # see if we have the image locally if we 404
+            if(os.path.exists(f"{player_image_dir}{item["playerID"]}.jpg")):
+                return f'<img src="{player_image_dir}{item["playerID"]}.jpg" alt="{item['name']}">'
+    else:
+            # see if we have the image locally if we don't have an image URL
+            if(os.path.exists(f"{player_image_dir}{item["playerID"]}.jpg")):
+                return f'<img src="{player_image_dir}{item["playerID"]}.jpg" alt="{item['name']}">'
 
     return f'<img src="{player_image_dir}{not_found_image}.jpg" alt="{item['name']}">'
 
