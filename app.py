@@ -96,17 +96,6 @@ def build_player_image(item: object) -> str:
 
     return f'<img src="{player_image_dir}{not_found_image}.jpg" alt="{item['name']}">'
 
-def draw_same_person_path()->str:
-    print('draw same person')
-    ret_val = '<div align=center>'
-    ret_val = ret_val + '<table align=center style="border: none;">'
-    ret_val = ret_val + TR + TD
-    ret_val = ret_val + "Please choose different starting and ending people"
-    ret_val = ret_val + "</td></tr>"
-    ret_val = ret_val + "</table>"
-    ret_val = ret_val + "</div>"
-    return ret_val
-
 def path_team(item: object, debug: bool = False) -> str:
     print('path team called')
     if(debug):
@@ -151,6 +140,25 @@ def path_player(end_player: str, item_count: int, item: object, debug: bool = Fa
             ret_val = ret_val + f'<tr>{TD}{FONT_SPAN_BLACK}WHO PLAYED FOR{END_FONT_SPAN}</td></tr>'
     return ret_val
 
+def draw_same_person_path(path: object)->str:
+    print('draw same person')
+    ret_val = '<div align=center>'
+    ret_val = ret_val + generate_zero_degrees_string(path)
+    ret_val = ret_val + '<table align=center style="border: none;">'
+    item = path[0]['p'][-1]
+    bbrefid = item["bbrefid"]
+    name = item["name"]
+    link = build_bball_link(bbrefid)
+    image = build_player_image(item)
+    ret_val = ret_val + f'{TR}{TD}<a href="{link}" target="_blank">{image}{NEWLINE}</a></td>'
+    ret_val = ret_val + f'{TD}<a href="{link}" target="_blank">{NEWLINE}{FONT_SPAN_RED}{name}{END_FONT_SPAN}</a>'
+    ret_val = ret_val + f'<tr>{TD}{FONT_SPAN_BLACK}IS{END_FONT_SPAN}</td></tr>'
+    ret_val = ret_val + f'{TR}{TD}<a href="{link}" target="_blank">{image}{NEWLINE}</a></td>'
+    ret_val = ret_val + f'{TD}<a href="{link}" target="_blank">{NEWLINE}{FONT_SPAN_RED}{name}{END_FONT_SPAN}</a>'
+    ret_val = ret_val + "</table>"
+    ret_val = ret_val + "</div>"
+    return ret_val
+
 def draw_path(path: object, end_player: str, debug: bool = False)->str:
     print('draw path')
     #logos found at: 
@@ -183,6 +191,13 @@ def generate_degrees_string(path: object)->str:
     ret_val = ret_val + f'{END_FONT_SPAN}'
     return ret_val
 
+def generate_zero_degrees_string(path: object)->str:
+    ret_val = f'{FONT_SPAN_BLACK}{path[0]['p'][-1]['nameFirst'] + ' ' + path[0]['p'][-1]['nameLast']}'
+    ret_val = ret_val + f' is 0 degrees away from '
+    ret_val = ret_val + f'{path[0]['p'][-1]['nameFirst'] + ' ' + path[0]['p'][-1]['nameLast']}'
+    ret_val = ret_val + f'{END_FONT_SPAN}'
+    return ret_val
+
 def get_num_degrees(path: object)->str:
     num_degrees = 0
     for item in path[0]['p']:
@@ -205,7 +220,8 @@ def index():
         player2ID = request.args.get(PLAYER2_PARAM)
         print(f'getting {player1ID} -> {player2ID} info') 
         if player1ID == player2ID:
-            path_str = draw_same_person_path()
+            path = determine_degrees('howarry01', player2ID)
+            path_str = draw_same_person_path(path)
             return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
         path = determine_degrees(player1ID, player2ID)
         path_str = draw_path(path, player2ID)
@@ -218,14 +234,16 @@ def show_person():
     player2ID = request.form[PLAYER2_PARAM]
     print(f'getting {player1ID} -> {player2ID} info') 
     if player1ID == player2ID:
-        path_str = draw_same_person_path()
+        path = determine_degrees('howarry01', player2ID)
+        path_str = draw_same_person_path(path)
         return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
     path = determine_degrees(player1ID, player2ID)
     path_str = draw_path(path, player2ID)
+    
     return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
 
 print('not closing session here')
 #neo4J_session.close()
 
 # uncomment this to test locally
-# app.run(host='0.0.0.0', port=5000, debug=True)
+#app.run(host='0.0.0.0', port=5000, debug=True)
