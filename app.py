@@ -83,7 +83,7 @@ def build_player_image(item: object) -> str:
     print('build player image')
     if(item['imageUrl'] != ''):
         response = requests.get(f'{item['imageUrl']}')
-        if response.status_code == 200:
+        if response.status_code != 404:
             return f'<img src="{item['imageUrl']}" alt="{item['name']}">'
         else:
             # see if we have the image locally if we 404
@@ -246,4 +246,4 @@ print('not closing session here')
 #neo4J_session.close()
 
 # uncomment this to test locally
-#app.run(host='0.0.0.0', port=5000, debug=True)
+# app.run(host='0.0.0.0', port=5000, debug=True)
