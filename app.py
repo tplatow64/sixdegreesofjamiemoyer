@@ -208,9 +208,19 @@ def get_num_degrees(path: object)->str:
     else:
         return str(num_degrees) + ' degree'
 
+def load_new_page():
+    print('load new page')
+    player_cache = all_people()
+    return render_template('new-page.html', title='6 Degrees of Somebody Else', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str='')
+
+def load_jamie_page():
+    print('load jamie page')
+    player_cache = all_people()
+    return render_template('index2.html', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str='')
+
 print('cache people')
 player_cache = all_people()
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     print('index called')
     if PLAYER1_PARAM not in request.args:
@@ -238,9 +248,41 @@ def show_person():
         path_str = draw_same_person_path(path)
         return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
     path = determine_degrees(player1ID, player2ID)
-    path_str = draw_path(path, player2ID)
+    if(len(path) > 0):
+        path_str = draw_path(path, player2ID)
+        return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
+    else:
+        return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str='')
     
-    return render_template('index2.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
+@app.route('/freestyle', methods=['POST'])
+def show_new_person():
+    print('show new person')
+    player1ID = request.form[PLAYER1_PARAM]
+    player2ID = request.form[PLAYER2_PARAM]
+    print(f'getting {player1ID} -> {player2ID} info') 
+    if player1ID == player2ID:
+            if(player1ID != 'howarry01'):
+                path = determine_degrees('howarry01', player2ID)
+                path_str = draw_same_person_path(path)
+                return render_template('new-page.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
+            else:
+                path = determine_degrees(JAMIE_ID, player2ID)
+                path_str = draw_same_person_path(path)
+                return render_template('new-page.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
+    path = determine_degrees(player1ID, player2ID)
+    if(len(path) > 0):
+        path_str = draw_path(path, player2ID)
+        return render_template('new-page.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str=path_str)
+    else:
+        return render_template('new-page.html/', title='6 Degrees of Jamie Moyer', general_image_dir=general_image_dir, player_cache=player_cache, people=['n/a'], path_str='')
+
+@app.route('/freestyle', methods=['GET'])
+def new_page():
+    return load_new_page()
+
+@app.route('/', methods=['GET'])
+def jamie_page():
+    return load_jamie_page()
 
 print('not closing session here')
 #neo4J_session.close()
