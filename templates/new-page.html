@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Six Degrees of Jamie Moyer</title>
+        <title>Six Degrees of Somebody Else</title>
         <link rel="icon" type="image/x-icon" href="{{ general_image_dir }}favicon.ico" />
         <link rel="stylesheet" type="text/css" href="/static/css/autocomplete.css">
         <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/inputs.css">
         <script src="/static/javascript/autocomplete.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
         <div id="banner">
             <div id="wrapper" style="width:100%; overflow:hidden;margin: 0 auto;">
                 <div id="container" style="width:100%; margin-right:auto;position:relative;left:50%;margin-left:-759px;">
-                    <img src="{{ general_image_dir }}JamieMoyerBorder2.png" alt="Our Hero: Jamie Moyer" style="display:block;">
+                    <img src="{{ general_image_dir }}NotJamieMoyerBorder2.png" alt="Our Hero: Jamie Moyer" style="display:block;">
                 </div>
             </div>
         </div>
@@ -27,49 +28,54 @@
             border-radius: 10px
         }
     </style>
-    
-        
             <table style="margin:auto;">
-                <!--Make sure the form has the autocomplete function switched off:-->
                 <form id="find_player" autocomplete="off" method="post">
                 <tr>
                     <td style="margin:auto;margin-left:5%;margin-right:5%;">
                         <div style="margin:auto;text-align:center">
                             <p style='font-size:18.0pt;font-family:"Verdana",sans-serif;mso-fareast-font-family:
                             "Times New Roman";mso-bidi-font-family:Arial;color:#000000;display:block;margin:auto;max-width:100%;'><b>
-                            Connect Any MLB Player In History to Jamie Moyer! 
+                            Connect Any Two MLB Players In History! 
                             </b></p>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="margin:auto">
-                        </br>
-                        <div style="margin:auto;text-align:center">
-                            <div class="autocomplete" style="width:300px;margin:auto;display:inline-block">
-                            <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name" autofocus onfocus="this.select()">
-                            <input id="player1ID" type="hidden" name="player1ID">
-                            <input id="player2ID" type="hidden" name="player2ID" value="moyerja01">
-                            </div>
-                            <script>
-                                autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
-                            </script>
-                            <input id="submitButton" class="submitButton" type="submit" value="Connect Me To Jamie Moyer" style="display:inline-block" disabled>
-                        </div>
-                    </td>
-                </tr>
-                </form>
+    <td style="margin:auto">
+        <!--Make sure the form has the autocomplete function switched off:-->
+        <form id="find_player" autocomplete="off" method="post">
+            <div style="margin:auto;text-align:center">
+                <div class="inputs-row">
+                    <div class="autocomplete" style="width:300px;">
+                        <input id="myPlayer" type="text" name="myPlayer" placeholder="type player name" autofocus onfocus="this.select()">
+                        <input id="player1ID" type="hidden" name="player1ID">
+                    </div>
+                    <div class="autocomplete" style="width:300px;">
+                        <input id="myPlayer2" type="text" name="myPlayer2" placeholder="type another player name">
+                        <input id="player2ID" type="hidden" name="player2ID">
+                    </div>
+                </div>
+                <div class="button-row">
+                    <input id="submitButton" class="submitButton" type="submit" value="Connect Players" style="width:250px" disabled>
+                </div>
+                <script>
+                    autocomplete(document.getElementById("myPlayer"), document.getElementById("player1ID"), 'playerID', {{ player_cache|safe }});
+                    autocomplete(document.getElementById("myPlayer2"), document.getElementById("player2ID"), 'playerID', {{ player_cache|safe }});
+                </script>
+            </div>
+        </form>
+    </td>
+</tr>
                 <tr>
                     <td style="text-align:center;">
-                        <form action="/freestyle" method="get" style="display:inline;">
+                        <form action="/" method="get" style="display:inline;">
                             <button type="submit" class="submitButton" style="margin:auto;display:inline-block;">
-                                Connect any two MLB players
+                                Go back to Jamie Moyer
                             </button>
                         </form>
                     </td>
                 </tr>
             </table>
-        
     {% if path_str|length >0: %}
         <label id="pathway">{{ path_str }}</label>
     {% else %}

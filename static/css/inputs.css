@@ -1,0 +1,21 @@
+.inputs-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    .inputs-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}

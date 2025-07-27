@@ -37,7 +37,9 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
                 /* alert(this.getElementsByTagName("input")[0].value);*/
                 inp.value = this.getElementsByTagName("input")[0].value;
                 hidden_inp.value = this.getElementsByTagName("input")[1].value;
-                document.getElementById("submitButton").disabled=false;
+                if(document.getElementById("player1ID").hasAttribute("value") && document.getElementById("player2ID").hasAttribute("value")){
+                  document.getElementById("submitButton").disabled=false;
+                }
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
