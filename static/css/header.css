@@ -49,3 +49,13 @@ button.submitButton {
     border: none; /* Remove default button border */
     padding: 10px 20px; /* Add some padding */
 }
+
+button.blueButton {
+    background-color:#465b9e;
+    font-weight: 700;
+    border-radius:12px;
+    cursor:pointer;
+    color: white; /* Text color */
+    border: none; /* Remove default button border */
+    padding: 10px 20px; /* Add some padding */
+}
