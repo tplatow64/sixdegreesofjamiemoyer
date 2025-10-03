@@ -22,7 +22,7 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
           const regex = buildFlexibleNameRegex(val);
-          if(regex.test(arr[i]['name']) && matchesFound < maxMatches) {
+          if((regex.test(decodeHtmlEntities(arr[i]['name'])) || regex.test(arr[i]['name'])) && matchesFound < maxMatches) {
             /*pos = arr[i]['name'].toUpperCase().search(val.toUpperCase())  for bolding*/
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
@@ -114,6 +114,16 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
     const sepClass = "[\\s.'-]*"; // characters to ignore between letters
     const pattern = chars.join(sepClass);
     return new RegExp(pattern, 'i'); // case-insensitive
+  }
+
+  function decodeHtmlEntities(str) {
+    if (!str) return '';
+    if (str.includes('&')) {
+      const txt = document.createElement("textarea");
+      txt.innerHTML = str;
+      return txt.value;
+    }
+    return str;
   }
 
   /*execute a function when someone clicks in the document:*/
