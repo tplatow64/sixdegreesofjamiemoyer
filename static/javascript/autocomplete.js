@@ -21,8 +21,8 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
         var matchesFound = 0;
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
-          var regex = val.toUpperCase().replace(/\./g, '\\.')
-          if (arr[i]['name'].toUpperCase().search(regex)>=0 && matchesFound < maxMatches) {
+          const regex = buildFlexibleNameRegex(val);
+          if((regex.test(decodeHtmlEntities(arr[i]['name'])) || regex.test(arr[i]['name'])) && matchesFound < maxMatches) {
             /*pos = arr[i]['name'].toUpperCase().search(val.toUpperCase())  for bolding*/
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
@@ -70,15 +70,6 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
         } else if (e.keyCode == 13) {
           /*If the ENTER key is pressed, prevent the form from being submitted,*/
           e.preventDefault();
-          // if(a.children.length !== 1){ // more than 1 player in list
-            
-          // }else{ // only 1 player in list
-          //   currentFocus = 0;
-          //   if (x) x[currentFocus].click();
-          //   document.getElementById("find_player").submit();
-          // }
-          
-          
           if (currentFocus > -1) {
             /*and simulate a click on the "active" item:*/
             if (x) x[currentFocus].click();
@@ -107,10 +98,34 @@ function autocomplete(inp, hidden_inp, id_name, arr) {
       var x = document.getElementsByClassName("autocomplete-items");
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != inp) {
-        x[i].parentNode.removeChild(x[i]);
+          x[i].parentNode.removeChild(x[i]);
+        }
       }
     }
+
+  function escapeRegexChars(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
   }
+
+  function buildFlexibleNameRegex(val) {
+    const stripped = val.replace(/[\s.'-]/g, ''); // adjust set if you want different ignored chars
+
+    const chars = stripped.split('').map(ch => escapeRegexChars(ch));
+    const sepClass = "[\\s.'-]*"; // characters to ignore between letters
+    const pattern = chars.join(sepClass);
+    return new RegExp(pattern, 'i'); // case-insensitive
+  }
+
+  function decodeHtmlEntities(str) {
+    if (!str) return '';
+    if (str.includes('&')) {
+      const txt = document.createElement("textarea");
+      txt.innerHTML = str;
+      return txt.value;
+    }
+    return str;
+  }
+
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
